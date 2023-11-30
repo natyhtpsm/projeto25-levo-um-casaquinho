@@ -1,16 +1,23 @@
 import styled from "styled-components";
 import CardInfos from "../components/CardInfos";
 import Search from "../components/Search";
+import React, { useState } from 'react';
 
-export default function Homepage(){
+export default function Homepage() {
+  const [dadosClima, setDadosClima] = useState(null);
+  
+  const atualizarDadosClima = (novosDados) => {
+    setDadosClima(novosDados);
+  };
+
     return(
         <>
             <Container>
                 <Esquerda>
-                    <Search/>
+                    <Search atualizarDadosClima={atualizarDadosClima}/>
                 </Esquerda>
                 <Direita>
-                    <CardInfos/>
+                    <CardInfos dadosClima={dadosClima}/>
                 </Direita>
             </Container>
      

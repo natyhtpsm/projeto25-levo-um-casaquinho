@@ -1,13 +1,42 @@
 import styled from "styled-components";
 import SearchImg from "../assets/search.png";
+import React, { useState } from 'react';
+import axios from "axios";
 
-export default function Search(){
+export default function Search({ atualizarDadosClima }){
+    const [cidade, setCidade] = useState('');
+  
+    const handleInputChange = (event) => {
+      setCidade(event.target.value);
+    };
+  
+    const obterDadosClima = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_API_KEY;  
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}`;
+  
+        const resposta = await axios.get(url);
+        atualizarDadosClima(resposta.data);
+        console.log(resposta.data);
+      } catch (erro) {
+        console.error('Erro na requisição:', erro);
+      }
+    };
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      obterDadosClima();
+    };
     return(
         <>
             <Container>
-                <Icone/>
+                <Icone onClick={handleSubmit}/>
                 <Texto>
-                    <Input placeholder="Procure por uma cidade"/>
+                    <Input placeholder="Procure por uma cidade"
+                        type="text"
+                        value={cidade}
+                        onChange={handleInputChange}
+                    />
                 </Texto>
             </Container>
         </>
