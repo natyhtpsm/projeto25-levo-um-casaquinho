@@ -13,7 +13,7 @@ export default function Search({ atualizarDadosClima }){
     const obterDadosClima = async () => {
       try {
         const apiKey = import.meta.env.VITE_API_KEY;  
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&lang=pt&units=metric`;
   
         const resposta = await axios.get(url);
         atualizarDadosClima(resposta.data);
@@ -44,34 +44,35 @@ export default function Search({ atualizarDadosClima }){
 }
 
 const Container = styled.div`
-    display: flex;
-    align-items: center;
-    width: 75%;
-    height: 7%;
-    border-radius: 10px;
-    background-color: #D8D8D8;
+  display: flex;
+  align-items: center;
+  width: 75%;
+  height: 7%;
+  border-radius: 10px;
+  background-color: #D8D8D8;
+  margin-bottom: 5%;
 `
 const Texto = styled.div`
 
 `
 const Icone = styled.div`
-    background-image: url(${SearchImg});
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 10%;
-    height: 50%;
+  background-image: url(${SearchImg});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 10%;
+  height: 50%;
 `
 const Input = styled.input`
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    font-family: Montserrat;
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0em;
-    text-align: left;
-    color: #424243;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-family: Montserrat;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #424243;
 `
