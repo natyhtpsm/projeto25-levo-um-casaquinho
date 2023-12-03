@@ -4,6 +4,7 @@ import Search from "../components/Search";
 import React, { useState, useEffect } from 'react';
 import LogoImg from "../assets/casaquinho.png";
 import InfoImg from "../components/InfoImg";
+import ContainerCity from "../components/ContainerCity";
 import Switch from '@mui/material/Switch';
 
 export default function Homepage() {
@@ -44,11 +45,19 @@ export default function Homepage() {
     const toggleUnidadeGlobal = () => {
       setToggleUnidade((prevUnidade) => (prevUnidade === 'celsius' ? 'fahrenheit' : 'celsius'));
     };
+    
+    if (!dadosClima || !dadosClima.main || !dadosClima.weather || dadosClima.weather.length === 0) {
+      return null;
+    }
+    const maxima = dadosClima.main.temp_max;
+    const minima = dadosClima.main.temp_min;
+    const umidade = dadosClima.main.humidity;
+    const velocidadeVento = dadosClima.wind.speed;
+ 
   
     return (
       <>
         <Container>
-
         <Esquerda>
           <Logo src={LogoImg}/>
           <Search atualizarDadosClima={atualizarDadosClima}/>
@@ -74,7 +83,22 @@ export default function Homepage() {
         </Esquerda>
 
           <Direita>
-            <CardInfos dadosClima={dadosClima}/>
+            <ContainerButton>
+              <Button>Hoje</Button>
+              <Button>Próximos dias</Button>
+            </ContainerButton>
+            <ContainerCity dadosClima={dadosClima} />
+            <ContainerCards>
+              <ContainerTwo>
+                <CardInfos label="Máxima" value={maxima} />
+                <CardInfos label="Mínima" value={minima} />
+              </ContainerTwo>
+              <ContainerTwo>
+               <CardInfos label="Umidade" value={umidade} />
+                <CardInfos label="Velocidade do Vento" value={velocidadeVento} />
+              </ContainerTwo>
+            </ContainerCards>
+            
           </Direita>
         </Container>
       </>
@@ -97,8 +121,8 @@ const Esquerda = styled.div`
 const Direita = styled.div` 
     display: flex;
     justify-content: center;
-    display: flex;
-    width: 65%;
+    flex-direction: column;
+       width: 65%;
     height: 100vh;
     background-color: #D8D8D8;
 `
@@ -148,4 +172,40 @@ font-weight: 400;
 line-height: 48px;
 letter-spacing: 0em;
 text-align: left;
+`
+const ContainerButton = styled.div`
+    display: flex;
+    text-align: left;
+    width: 60%;
+    height: 40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+`
+const Button = styled.button`
+
+    height: 100%;
+    border: none;
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 400;
+    text-align: left;
+    color: black;
+    cursor: pointer;
+    background-color: transparent;
+`
+const ContainerCards = styled.div`
+    display: block;
+    justify-content: wrap;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+`
+const ContainerTwo  = styled.div`
+    display: flex;
+    background-color: transparent;
+    margin-bottom: 20px;
 `

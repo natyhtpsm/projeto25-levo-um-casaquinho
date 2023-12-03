@@ -17,15 +17,28 @@ export default function Search({ atualizarDadosClima }){
   
         const resposta = await axios.get(url);
         atualizarDadosClima(resposta.data);
-        console.log(resposta.data);
+        
       } catch (erro) {
         console.error('Erro na requisição:', erro);
       }
     };
-  
+    const obterPrevisaoProximosDias = async () => {
+      try {
+        const apiKey = import.meta.env.VITE_API_KEY;
+        const url = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}`;
+    
+        const resposta = await axios.get(url);
+        
+      } catch (erro) {
+        console.error('Erro na requisição de previsão:', erro);
+      }
+    };
+      
+    
     const handleSubmit = (event) => {
       event.preventDefault();
       obterDadosClima();
+      obterPrevisaoProximosDias();
     };
     return(
         <>
