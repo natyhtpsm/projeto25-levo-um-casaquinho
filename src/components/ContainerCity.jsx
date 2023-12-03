@@ -29,7 +29,6 @@ const Container = styled.div`
 const City = styled.text`
     font-family: Poppins;
     font-size: 80px;
-    letter-spacing: 0em;
     font-family: Poppins;
     color: black;
 
@@ -37,9 +36,6 @@ const City = styled.text`
 const LatLong = styled.text`
     font-family: Poppins;
     font-size: 15px;
-    letter-spacing: 0em;
     font-family: Poppins;
-
     color: black;
-
 `

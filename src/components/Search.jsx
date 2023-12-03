@@ -1,45 +1,46 @@
 import styled from "styled-components";
 import SearchImg from "../assets/search.png";
 import React, { useState } from 'react';
+import { useClimaContext } from "../context/ClimaContext";
 import axios from "axios";
 
-export default function Search({ atualizarDadosClima }){
-    const [cidade, setCidade] = useState('');
+export default function Search() {
+
+  const { atualizarDadosClima } = useClimaContext();
+  const [cidade, setCidade] = useState('');
   
-    const handleInputChange = (event) => {
-      setCidade(event.target.value);
-    };
-  
-    const obterDadosClima = async () => {
-      try {
-        const apiKey = import.meta.env.VITE_API_KEY;  
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&lang=pt&units=metric`;
-  
-        const resposta = await axios.get(url);
-        atualizarDadosClima(resposta.data);
-        
-      } catch (erro) {
-        console.error('Erro na requisição:', erro);
-      }
-    };
-    const obterPrevisaoProximosDias = async () => {
-      try {
-        const apiKey = import.meta.env.VITE_API_KEY;
-        const url = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}`;
-    
-        const resposta = await axios.get(url);
-        
-      } catch (erro) {
-        console.error('Erro na requisição de previsão:', erro);
-      }
-    };
-      
-    
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      obterDadosClima();
-      obterPrevisaoProximosDias();
-    };
+  const handleInputChange = (event) => {
+    setCidade(event.target.value);
+  };
+  const obterDadosClima = async () => {
+    try {
+      const apiKey = import.meta.env.VITE_API_KEY;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&lang=pt&units=metric`;
+
+      const resposta = await axios.get(url);
+      atualizarDadosClima(resposta.data);
+    } catch (erro) {
+      console.error('Erro na requisição:', erro);
+    }
+  };
+
+  const obterPrevisaoProximosDias = async () => {
+    try {
+      const apiKey = import.meta.env.VITE_API_KEY;
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&appid=${apiKey}`;
+
+      const resposta = await axios.get(url);
+    } catch (erro) {
+      console.error('Erro na requisição de previsão:', erro);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    obterDadosClima();
+    obterPrevisaoProximosDias();
+  };
+
     return(
         <>
             <Container>

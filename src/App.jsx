@@ -1,9 +1,12 @@
 import Homepage from './pages/Homepage'
+import { ClimaProvider } from './context/ClimaContext'
 
 function App() {
   return (
     <>
-      <Homepage/>
+      <ClimaProvider>
+        <Homepage/>
+      </ClimaProvider>
     </>
   )
 }

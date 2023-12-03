@@ -15,12 +15,10 @@ export default function Homepage() {
   useEffect(() => {
     const atualizarDataHora = () => {
       const dataAtual = new Date();
-      
       const opcoesData = { year: 'numeric', month: 'numeric', day: 'numeric' };
       const dataFormatada = dataAtual.toLocaleDateString('pt-BR', opcoesData);
       setData(dataFormatada);
-      
-      
+          
       const opcoesDiaSemana = { weekday: 'long' };
       const diaSemanaFormatado = dataAtual.toLocaleDateString('pt-BR', opcoesDiaSemana);
       setDiaSemana(diaSemanaFormatado);
@@ -37,6 +35,12 @@ export default function Homepage() {
   }, []);
     const [dadosClima, setDadosClima] = useState(null);
     const [toggleUnidade, setToggleUnidade] = useState('celsius');
+    const [activeButton, setActiveButton] = useState('hoje');
+
+    const handleButtonClick = (button) => {
+      setActiveButton(button);
+      
+    };
   
     const atualizarDadosClima = (novosDados) => {
       setDadosClima(novosDados);
@@ -45,60 +49,76 @@ export default function Homepage() {
     const toggleUnidadeGlobal = () => {
       setToggleUnidade((prevUnidade) => (prevUnidade === 'celsius' ? 'fahrenheit' : 'celsius'));
     };
-    
-    if (!dadosClima || !dadosClima.main || !dadosClima.weather || dadosClima.weather.length === 0) {
-      return null;
-    }
-    const maxima = dadosClima.main.temp_max;
-    const minima = dadosClima.main.temp_min;
-    const umidade = dadosClima.main.humidity;
-    const velocidadeVento = dadosClima.wind.speed;
- 
   
     return (
       <>
         <Container>
-        <Esquerda>
-          <Logo src={LogoImg}/>
-          <Search atualizarDadosClima={atualizarDadosClima}/>
-          {dadosClima ? (
-          <>
-            <InfoImg dadosClima={dadosClima} toggleUnidade={toggleUnidade}/>
-            <Divisao/>
-            <ContainerDataHora>
-              <DataHora>{diaSemana}, {hora}</DataHora>
-            </ContainerDataHora>
-            <DivSwitch> 
+          <Esquerda>
+            <Logo src={LogoImg}/>
+            <Search atualizarDadosClima={atualizarDadosClima}/>
+            {dadosClima ? (
+            <>
+              <InfoImg dadosClima={dadosClima} toggleUnidade={toggleUnidade}/>
+              <Divisao/>
+              <ContainerDataHora>
+                <DataHora>{diaSemana}, {hora}</DataHora>
+              </ContainerDataHora>
+              <DivSwitch> 
 
-              <Switch
-                onChange={toggleUnidadeGlobal}
-                checked={toggleUnidade === 'farhenheit'}
-                inputProps={{ 'aria-label': 'Alternar Unidade' }}
-              />
-              <UnidadeFahrenheit>°F</UnidadeFahrenheit>
-            </DivSwitch>
-          </>
-          ) : null}
-          <Text>Todos os direitos reservados, 2023.</Text>
-        </Esquerda>
-
+                <Switch
+                  onChange={toggleUnidadeGlobal}
+                  checked={toggleUnidade === 'farhenheit'}
+                  inputProps={{ 'aria-label': 'Alternar Unidade' }}
+                />
+                <UnidadeFahrenheit>°F</UnidadeFahrenheit>
+              </DivSwitch>
+            </>
+            ) : null}
+                      <Footer>
+              <Text>Todos os direitos reservados, 2023.</Text>
+              
+            </Footer>
+          </Esquerda>
           <Direita>
-            <ContainerButton>
-              <Button>Hoje</Button>
-              <Button>Próximos dias</Button>
-            </ContainerButton>
-            <ContainerCity dadosClima={dadosClima} />
+            <ContainerDir>
+              <ContainerButton>
+                <Button
+                  onClick={() => handleButtonClick('hoje')}
+                  style={{ color: activeButton === 'hoje' ? 'black' : 'red' }}
+                >
+                  Hoje
+                </Button>
+                <Button
+                  onClick={() => handleButtonClick('proximosDias')}
+                  style={{ color: activeButton === 'proximosDias' ? 'black' : 'red' }}
+                >
+                  Próximos dias
+                </Button>
+              </ContainerButton>
+              <ContainerCity dadosClima={dadosClima} />
+            </ContainerDir>
+            {activeButton === 'hoje' && (
             <ContainerCards>
               <ContainerTwo>
-                <CardInfos label="Máxima" value={maxima} />
-                <CardInfos label="Mínima" value={minima} />
+                <CardInfos/>
+                <CardInfos dadosClima={dadosClima}/>
               </ContainerTwo>
               <ContainerTwo>
-               <CardInfos label="Umidade" value={umidade} />
-                <CardInfos label="Velocidade do Vento" value={velocidadeVento} />
+                <CardInfos dadosClima={dadosClima}/>
+                <CardInfos dadosClima={dadosClima}/>
               </ContainerTwo>
             </ContainerCards>
-            
+          )}
+          {activeButton === 'proximosDias' && (
+           
+        
+              <h1>Próximos dias</h1>
+           
+          )}
+     
+            <Footer>
+              <Text>Dados fornecidos pela Open Weather API</Text>
+            </Footer>
           </Direita>
         </Container>
       </>
@@ -107,24 +127,25 @@ export default function Homepage() {
   
 
 const Container = styled.div`
-    display: flex;
-    width: 100vw;
-    height: 100vh;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
 `
 const Esquerda = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 35%;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 35%;
+  height: 100vh;
 ` 
 const Direita = styled.div` 
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-       width: 65%;
-    height: 100vh;
-    background-color: #D8D8D8;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 65%;
+  height: 100vh;
+  background-color: #D8D8D8;
+  padding-left: 3%;
 `
 const Logo = styled.img`
     width: 80%;
@@ -156,7 +177,7 @@ const ContainerDataHora = styled.div`
     margin-bottom: 30px;
 `     
 const UnidadeFahrenheit = styled.text`
-margin-top: 11px;
+  margin-top: 11px;
 `
 
 const DivSwitch = styled.div`
@@ -169,9 +190,7 @@ const DivSwitch = styled.div`
     font-family: Poppins;
 font-size: 15px;
 font-weight: 400;
-line-height: 48px;
-letter-spacing: 0em;
-text-align: left;
+
 `
 const ContainerButton = styled.div`
     display: flex;
@@ -194,18 +213,35 @@ const Button = styled.button`
     background-color: transparent;
 `
 const ContainerCards = styled.div`
-    display: block;
-    justify-content: wrap;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  display: block;
+  justify-content: wrap;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin-top: 250px;
+  margin-bottom: 20px;
 `
 const ContainerTwo  = styled.div`
-    display: flex;
-    background-color: transparent;
-    margin-bottom: 20px;
+  display: flex;
+  background-color: transparent;
+  margin-bottom: 20px;
 `
+
+const Footer = styled.footer`
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  width: 50%;
+  height: 50px;
+
+`
+const ContainerDir = styled.div`
+  position: fixed;
+  top: 0;
+  width: 100%;  
+  height: 200px; 
+  `

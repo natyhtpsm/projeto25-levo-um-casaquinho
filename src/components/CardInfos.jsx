@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export default function CardInfos({ label, value }) {
+export default function CardInfos({ dadosClima }) {
     return (
       <>
         <Container>
-          <h1>
-            {label}: {value}
-          </h1>
+            <ContainerText>
+                <Label>Mínima</Label>
+                <Data>23° C</Data>
+            </ContainerText>
         </Container>
            
       </>
@@ -15,6 +16,8 @@ export default function CardInfos({ label, value }) {
 
 const Container = styled.div`
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 39%;
     height: 120px;
     border-radius: 32px;
@@ -22,4 +25,30 @@ const Container = styled.div`
     background: linear-gradient(117.33deg, #4D4494 22.83%, #4F43AE 90.03%);
     background-color: black;
     margin-right: 20px;
+    color: white;
+`
+
+const Label = styled.text`
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 10px;
+   
+` 
+const Data = styled.text`
+    font-family: Poppins;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 10px;
+    
+`
+const ContainerText = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    margin-left: 30px;
 `
