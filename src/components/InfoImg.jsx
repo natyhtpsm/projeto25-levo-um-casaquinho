@@ -40,7 +40,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     width: 75%;
-    height: 31%;
+    height: 200px;
     
 `
 const Img = styled.img`
@@ -70,7 +70,7 @@ const ContainerBottom = styled.div`
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 40%;
+    height: 35px;
     font-family: Poppins;
     font-size: 20px;
     font-weight: 400;

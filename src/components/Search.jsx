@@ -47,10 +47,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 75%;
-  height: 7%;
+  height: 50px;
   border-radius: 10px;
   background-color: #D8D8D8;
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 `
 const Texto = styled.div`
 
