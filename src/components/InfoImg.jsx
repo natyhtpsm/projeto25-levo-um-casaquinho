@@ -1,39 +1,39 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 
-export default function InfoImg({ dadosClima, toggleUnidade }) {
+export default function InfoImg({ dadosClima, unidadeAtual }) {
 
-    if (!dadosClima || !dadosClima.weather || dadosClima.weather.length === 0) {
-      return null;
-    }
-  
-    const iconCode = dadosClima.weather[0].icon;
-  
-    const temperaturaCelsius = dadosClima.main.temp;
-    const temperaturaFahrenheit = (temperaturaCelsius * 9) / 5 + 32;
-  
-    const temperaturaExibida = toggleUnidade === 'celsius'
+  if (!dadosClima || !dadosClima.weather || dadosClima.weather.length === 0) {
+    return null;
+  }
+
+  const iconCode = dadosClima.weather[0].icon;
+
+  const temperaturaCelsius = dadosClima.main.temp;
+  const temperaturaFahrenheit = (temperaturaCelsius * 9) / 5 + 32;
+
+  const temperaturaExibida = unidadeAtual === 'celsius'
     ? Math.round(temperaturaCelsius) 
     : Math.round(temperaturaFahrenheit);
-    const unidadeExibida = toggleUnidade === 'celsius' ? '°C' : '°F';
-  
-    return (
-      <>
-        <Container>
-          <ContainerTop>           
-            <Img src={`http://openweathermap.org/img/w/${iconCode}.png`} alt="Condição do tempo" />
-            <ContainerTemp>
-                <Temperatura>{temperaturaExibida}</Temperatura> 
-              <Unidade>{unidadeExibida}</Unidade>
-            </ContainerTemp>
-          </ContainerTop>
-          <ContainerBottom>
-            <Texto>{dadosClima.weather[0].description}</Texto>
-          </ContainerBottom>
-        </Container>
-      </>
-    );
-  }
+  const unidadeExibida = unidadeAtual === 'celsius' ? '°C' : '°F';
+
+  return (
+    <>
+      <Container>
+        <ContainerTop>           
+          <Img src={`http://openweathermap.org/img/w/${iconCode}.png`} alt="Condição do tempo" />
+          <ContainerTemp>
+            <Temperatura>{temperaturaExibida}</Temperatura> 
+            <Unidade>{unidadeExibida}</Unidade>
+          </ContainerTemp>
+        </ContainerTop>
+        <ContainerBottom>
+          <Texto>{dadosClima.weather[0].description}</Texto>
+        </ContainerBottom>
+      </Container>
+    </>
+  );
+}
   
 const Container = styled.div`
     display: flex;

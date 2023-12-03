@@ -8,7 +8,6 @@ export default function Search() {
 
   const { atualizarDadosClima } = useClimaContext();
   const [cidade, setCidade] = useState('');
-  
   const handleInputChange = (event) => {
     setCidade(event.target.value);
   };

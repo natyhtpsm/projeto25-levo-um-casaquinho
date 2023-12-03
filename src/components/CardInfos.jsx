@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export default function CardInfos({ dadosClima }) {
+export default function CardInfos({ tipo, valor}) {
     return (
       <>
         <Container>
             <ContainerText>
-                <Label>Mínima</Label>
-                <Data>23° C</Data>
+                <Label>{tipo}</Label>
+                <Data>{valor}</Data>
             </ContainerText>
         </Container>
            
