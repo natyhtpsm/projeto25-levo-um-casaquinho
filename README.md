@@ -1,4 +1,4 @@
-# Casaquinho 🧥 - Sua Assistente de Clima
+# Devo Levar Um Casaquinho? 🧥 - Seu Assistente de Clima
 
 Uma das principais preocupações ao planejar passeios ou viagens é saber que roupa levar. O aplicativo "Casaquinho" oferece informações precisas sobre o clima, incluindo temperaturas atuais, máximas, mínimas e previsões para os próximos dias, para que você possa se vestir adequadamente.
 
@@ -28,15 +28,15 @@ Confira a aplicação em ação:
 ## 📚 Guia de Instalação e Uso
 
 1. Clone o repositório:
-  git clone [(https://github.com/natyhtpsm/projeto25-levo-um-casaquinho/)]
+  `git clone https://github.com/natyhtpsm/projeto25-levo-um-casaquinho/`
 
 2. Instale as dependências:
 
-  npm install
+  `npm install`
 
 3. Inicie a aplicação:
 
-  npm run dev
+  `npm run dev`
 
 ## 🌡️ Como Funciona?
 
