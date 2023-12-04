@@ -28,15 +28,16 @@ Confira a aplicação em ação:
 ## 📚 Guia de Instalação e Uso
 
 1. Clone o repositório:
-  `git clone https://github.com/natyhtpsm/projeto25-levo-um-casaquinho/`
+ 
+  - `git clone https://github.com/natyhtpsm/projeto25-levo-um-casaquinho/`
 
-2. Instale as dependências:
+3. Instale as dependências:
 
-  `npm install`
+  - `npm install`
 
 3. Inicie a aplicação:
 
-  `npm run dev`
+  - `npm run dev`
 
 ## 🌡️ Como Funciona?
 
