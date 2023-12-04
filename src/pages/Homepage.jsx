@@ -7,6 +7,7 @@ import InfoImg from "../components/InfoImg";
 import ContainerCity from "../components/ContainerCity";
 import Switch from '@mui/material/Switch';
 import { useClimaContext } from "../context/ClimaContext";
+import Chart from "../components/Chart";
 
 export default function Homepage() {
   const { atualizarDadosClima } = useClimaContext();
@@ -111,12 +112,12 @@ export default function Homepage() {
           <Text>Pesquise uma cidade</Text>
         )}
           {activeButton === 'proximosDias' && (
-           
-        
-              <Text>Proximos</Text>
-           
+                  
+              <>
+                <Chart latitude={dadosClima.coord.lat} longitude={dadosClima.coord.lon}/>
+              </>
+         
           )}
-     
             <Footer>
               <Text>Dados fornecidos pela Open Weather API</Text>
             </Footer>
