@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export default function Chart({ latitude, longitude }) {
   const [dadosGrafico, setDadosGrafico] = useState([]);
@@ -52,7 +52,7 @@ export default function Chart({ latitude, longitude }) {
           <Line type="monotone" dataKey="temp" stroke="#4d4494" yAxisId={0} />
         </LineChart>
       ) : (
-        <div>Carregando dados do gráfico...</div>
+        <Texto> Carregando... </Texto>
       )}
     </Container>
   );
@@ -60,10 +60,23 @@ export default function Chart({ latitude, longitude }) {
 
 
 const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 160px;
-    margin-bottom: 20px;
-  
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 160px;
+  margin-bottom: 20px;
+  text-align: center;  
 `
+const blinkAnimation = keyframes`
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+`;
+
+const Texto = styled.div`
+  font-family: Poppins, sans-serif;
+  text-align: center;
+  font-size: 100px;
+  color: #C8C8C8;
+  animation: ${blinkAnimation} 0.2s linear infinite;
+`;

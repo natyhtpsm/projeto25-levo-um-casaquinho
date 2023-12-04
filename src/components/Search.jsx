@@ -54,7 +54,7 @@ const Container = styled.div`
   margin-bottom: 20px;
 `
 const Texto = styled.div`
-
+  font-family: Poopins;
 `
 const Icone = styled.div`
   background-image: url(${SearchImg});

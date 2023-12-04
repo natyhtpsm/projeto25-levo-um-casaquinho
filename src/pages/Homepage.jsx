@@ -69,25 +69,27 @@ export default function Homepage() {
             </>
             ) : null}
             <Footer>
-              <Text>Todos os direitos reservados, 2023.</Text>
+              <Texto>Todos os direitos reservados, 2023.</Texto>
             </Footer>
           </Esquerda>
           <Direita>
             <ContainerDir>
-              <ContainerButton>
-                <Button
-                  onClick={() => handleButtonClick('hoje')}
-                  style={{ color: activeButton === 'hoje' ? 'black' : '#C8C8C8' }}
-                >
-                  Hoje
-                </Button>
-                <Button
-                  onClick={() => handleButtonClick('proximosDias')}
-                  style={{ color: activeButton === 'proximosDias' ? 'black' : '#C8C8C8' }}
-                >
-                  Próximos dias
-                </Button>
-              </ContainerButton>
+            <ContainerButton>
+              <Button
+                onClick={() => handleButtonClick('hoje')}
+                style={{ color: activeButton === 'hoje' ? 'black' : '#C8C8C8' }}
+                disabled={!dadosClima} 
+              >
+                Hoje
+              </Button>
+              <Button
+                onClick={() => handleButtonClick('proximosDias')}
+                style={{ color: activeButton === 'proximosDias' ? 'black' : '#C8C8C8' }}
+                disabled={!dadosClima} 
+              >
+                Próximos dias
+              </Button>
+            </ContainerButton>
               <ContainerCity dadosClima={dadosClima} />
             </ContainerDir>
             {dadosClima ? (
@@ -104,22 +106,25 @@ export default function Homepage() {
               </ContainerTwo>
               </ContainerCards>
             )}
-            {activeButton === 'proximosDias' && (
-              <Text>Próximos</Text>
-            )}
           </>
         ) : (
-          <Text>Pesquise uma cidade</Text>
+          <NoCity>Para começar, pesquise por uma cidade.</NoCity>
         )}
           {activeButton === 'proximosDias' && (
                   
               <>
                 <Chart latitude={dadosClima.coord.lat} longitude={dadosClima.coord.lon}/>
               </>
-         
+       
           )}
             <Footer>
-              <Text>Dados fornecidos pela Open Weather API</Text>
+            <Texto>
+              Dados fornecidos pela{" "}  
+              <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
+                 Open Weather API
+              </a>
+            </Texto>
+
             </Footer>
           </Direita>
         </Container>
@@ -150,69 +155,71 @@ const Direita = styled.div`
   padding-left: 3%;
 `
 const Logo = styled.img`
-    width: 80%;
-    height: 13%;
-    margin-top: 5%;
-    margin-bottom: 5%;
+  width: 80%;
+  height: 13%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 `
 const Divisao = styled.div`
-    width: 65%;
-    background-color: #D8D8D8;
-    border: 1px solid #EDEDED;
+  width: 65%;
+  background-color: #D8D8D8;
+  border: 1px solid #EDEDED;
 `
 const DataHora = styled.div`
-    display: flex;
-    margin-bottom: 5%;
-    font-family: Poppins;
-    font-size: 15px;
-    font-weight: 400;
-    margin-top: 10px;
-    text-align: left;
-
+  display: flex;
+  margin-bottom: 5%;
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+  text-align: left;
 `
 const ContainerDataHora = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  margin-bottom: 30px;
 `     
 const UnidadeFahrenheit = styled.text`
   margin-top: 11px;
 `
 
 const DivSwitch = styled.div`
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 80px;`
-
-    const Text = styled.text`
-    font-family: Poppins;
-font-size: 15px;
-font-weight: 400;
-
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+`
+const Texto = styled.text`
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+  a{
+    text-decoration: none;
+    color: #96A7F2;
+  }
 `
 const ContainerButton = styled.div`
-    display: flex;
-    text-align: left;
-    width: 60%;
-    height: 40px;
-    margin-top: 20px;
-    margin-bottom: 40px;
+  display: flex;
+  text-align: left;
+  width: 60%;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 40px;
 `
 const Button = styled.button`
-
-    height: 100%;
-    border: none;
-    font-family: Poppins;
-    font-size: 30px;
-    font-weight: 400;
-    text-align: left;
-    color: black;
-    cursor: pointer;
-    background-color: transparent;
+  height: 100%;
+  border: none;
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 400;
+  text-align: left;
+  color: black;
+  cursor: pointer;
+  background-color: transparent;
 `
 const ContainerCards = styled.div`
   display: block;
@@ -239,11 +246,17 @@ const Footer = styled.footer`
   bottom: 0;
   width: 50%;
   height: 50px;
-
 `
 const ContainerDir = styled.div`
   position: fixed;
   top: 0;
   width: 100%;  
   height: 200px; 
-  `
+`
+
+const NoCity = styled.text`
+  font-family: Poppins;
+  font-size: 30px;
+  font-weight: 400;
+  text-align: center;
+`   
