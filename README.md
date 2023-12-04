@@ -28,7 +28,7 @@ Confira a aplicação em ação:
 ## 📚 Guia de Instalação e Uso
 
 1. Clone o repositório:
-  git clone [url-do-repositorio](https://github.com/natyhtpsm/projeto25-levo-um-casaquinho/)
+  git clone [(https://github.com/natyhtpsm/projeto25-levo-um-casaquinho/)]
 
 2. Instale as dependências:
 
