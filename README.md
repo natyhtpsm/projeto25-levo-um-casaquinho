@@ -2,7 +2,7 @@
 
 Uma das principais preocupações ao planejar passeios ou viagens é saber que roupa levar. O aplicativo "Casaquinho" oferece informações precisas sobre o clima, incluindo temperaturas atuais, máximas, mínimas e previsões para os próximos dias, para que você possa se vestir adequadamente.
 
-![Versão Desktop](link-para-imagem-desktop)
+![Deploy](https://projeto25-levo-um-casaquinho-pink.vercel.app/)
 
 ## 🌤️ Recursos
 
@@ -23,7 +23,7 @@ Uma das principais preocupações ao planejar passeios ou viagens é saber que r
 
 Confira a aplicação em ação:
 
-[**Casaquinho Live Demo**](link-para-demo)
+[**Casaquinho Demo**](https://projeto25-levo-um-casaquinho-pink.vercel.app/)
 
 ## 📚 Guia de Instalação e Uso
 
