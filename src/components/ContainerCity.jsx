@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export default function ContainerCity({dadosClima}){
-   
+export default function ContainerCity({ dadosClima }) {
     if (!dadosClima || !dadosClima.name) {
         return null; 
     }
@@ -15,27 +14,33 @@ export default function ContainerCity({dadosClima}){
             <LatLong>Lat: {latitude} Long: {longitude}</LatLong>
         </Container>
     );
-    
 }
 
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 160px;
+    height: auto; 
     margin-bottom: 20px;
+`;
 
-`
-const City = styled.text`
-    font-family: Poppins;
-    font-size: 80px;
-    font-family: Poppins;
+const City = styled.div` 
+    font-family: Poppins, sans-serif; 
+    font-size: 40px;
     color: black;
+    text-align: center;
+    @media (min-width: 768px) {
+        font-size: 80px; 
+        text-align: left;
+    }
+`;
 
-`
-const LatLong = styled.text`
-    font-family: Poppins;
+const LatLong = styled.div` 
+    font-family: Poppins, sans-serif; 
     font-size: 15px;
-    font-family: Poppins;
     color: black;
-`
+    text-align: center;
+    @media (min-width: 768px) {
+        text-align: left;
+    }
+`;
