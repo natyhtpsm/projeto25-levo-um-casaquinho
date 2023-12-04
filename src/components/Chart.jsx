@@ -44,7 +44,7 @@ export default function Chart({ latitude, longitude }) {
   return (
     <Container>
       {dadosGrafico.length > 0 ? (
-        <LineChart width={600} height={300} data={dadosGrafico}>
+        <LineChart width={600} height={300} data={dadosGrafico} style={{ backgroundColor: '#ffffff' }}>
           <XAxis dataKey="dia" />
           <YAxis />
           <Tooltip />
@@ -58,14 +58,13 @@ export default function Chart({ latitude, longitude }) {
   );
 }
 
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 160px;
-  margin-bottom: 20px;
   text-align: center;  
+  margin-top: 20px;
 `
 const blinkAnimation = keyframes`
   0% { opacity: 0; }

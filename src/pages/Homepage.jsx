@@ -41,6 +41,13 @@ export default function Homepage() {
   const handleButtonClick = (button) => {
     setActiveButton(button);
   };
+  const recomendarCasaquinho = (dadosClima) => {
+    const { temp_max, temp_min, temp } = dadosClima.main;
+    const limiarTemperatura = 17;
+  
+    return temp_max < limiarTemperatura || temp_min < limiarTemperatura || temp < limiarTemperatura;
+  };
+  
   
     return (
       <>
@@ -93,29 +100,34 @@ export default function Homepage() {
               <ContainerCity dadosClima={dadosClima} />
             </ContainerDir>
             {dadosClima ? (
-          <>
-            {activeButton === 'hoje' && (
-              <ContainerCards>
-                <ContainerTwo>
-                <CardInfos tipo="Máxima" valor={`${dadosClima.main.temp_max}° C`} />
-                <CardInfos tipo="Mínima" valor={`${dadosClima.main.temp_min}° C`} />
-              </ContainerTwo>
-              <ContainerTwo>
-                <CardInfos tipo="Umidade" valor={`${dadosClima.main.humidity}%`} />
-                <CardInfos tipo="Velocidade do Vento" valor={`${dadosClima.wind.speed} m/s`} />
-              </ContainerTwo>
-              </ContainerCards>
-            )}
-          </>
-        ) : (
-          <NoCity>Para começar, pesquise por uma cidade.</NoCity>
-        )}
-          {activeButton === 'proximosDias' && (
-                  
-              <>
+            <>
+              {activeButton === 'hoje' && (
+                <>
+                  <ContainerCards>
+                    <ContainerTwo>
+                      <CardInfos tipo="Máxima" valor={`${dadosClima.main.temp_max}° C`} />
+                      <CardInfos tipo="Mínima" valor={`${dadosClima.main.temp_min}° C`} />
+                    </ContainerTwo>
+                    <ContainerTwo>
+                      <CardInfos tipo="Umidade" valor={`${dadosClima.main.humidity}%`} />
+                      <CardInfos tipo="Velocidade do Vento" valor={`${dadosClima.wind.speed} m/s`} />
+                    </ContainerTwo>
+                    <Recomendacao>
+                    {recomendarCasaquinho(dadosClima) ? 
+                      "É uma boa ideia levar um casaquinho!" : 
+                      "Não, você não deve levar um casaquinho."}
+                  </Recomendacao>
+                  </ContainerCards>
+
+                </>
+              )}
+
+              {activeButton === 'proximosDias' && (
                 <Chart latitude={dadosClima.coord.lat} longitude={dadosClima.coord.lon}/>
-              </>
-       
+              )}
+            </>
+          ) : (
+            <NoCity>Para começar, pesquise por uma cidade.</NoCity>
           )}
             <Footer>
             <Texto>
@@ -185,7 +197,6 @@ const ContainerDataHora = styled.div`
 const UnidadeFahrenheit = styled.text`
   margin-top: 11px;
 `
-
 const DivSwitch = styled.div`
   display: flex;
   justify-content: center;
@@ -237,7 +248,6 @@ const ContainerTwo  = styled.div`
   background-color: transparent;
   margin-bottom: 20px;
 `
-
 const Footer = styled.footer`
   position: fixed;
   display: flex;
@@ -253,10 +263,19 @@ const ContainerDir = styled.div`
   width: 100%;  
   height: 200px; 
 `
-
 const NoCity = styled.text`
   font-family: Poppins;
   font-size: 30px;
   font-weight: 400;
   text-align: center;
 `   
+const Recomendacao = styled.div`
+  font-family: Poppins;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: 0em;
+  text-align: left;
+  font-size: 16px;
+  color: #AFADAD;
+`;

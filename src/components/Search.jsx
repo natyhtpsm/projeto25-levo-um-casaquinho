@@ -28,20 +28,21 @@ export default function Search() {
     obterDadosClima();
   };
 
-    return(
-        <>
-            <Container>
-                <Icone onClick={handleSubmit}/>
-                <Texto>
-                    <Input placeholder="Procure por uma cidade"
-                        type="text"
-                        value={cidade}
-                        onChange={handleInputChange}
-                    />
-                </Texto>
-            </Container>
-        </>
-    )
+  return(
+    <>
+      <Container>
+          <Icone onClick={handleSubmit}/>
+            <Texto>
+              <Input 
+                placeholder="Procure por uma cidade"
+                type="text"
+                value={cidade}
+                onChange={handleInputChange}
+              />
+            </Texto>
+      </Container>
+    </>
+  )
 }
 
 const Container = styled.div`
