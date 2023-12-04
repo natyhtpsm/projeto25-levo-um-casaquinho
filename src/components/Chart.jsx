@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import styled, { keyframes } from 'styled-components';
 
 export default function Chart({ latitude, longitude }) {
@@ -44,13 +44,15 @@ export default function Chart({ latitude, longitude }) {
   return (
     <Container>
       {dadosGrafico.length > 0 ? (
-        <LineChart width={600} height={300} data={dadosGrafico} style={{ backgroundColor: '#ffffff' }}>
-          <XAxis dataKey="dia" />
-          <YAxis />
-          <Tooltip />
-          <CartesianGrid stroke="#efefef" />
-          <Line type="monotone" dataKey="temp" stroke="#4d4494" yAxisId={0} />
-        </LineChart>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={dadosGrafico}>
+            <XAxis dataKey="dia" />
+            <YAxis />
+            <Tooltip />
+            <CartesianGrid stroke="#efefef" />
+            <Line type="monotone" dataKey="temp" stroke="#4d4494" yAxisId={0} />
+          </LineChart>
+        </ResponsiveContainer>
       ) : (
         <Texto> Carregando... </Texto>
       )}
@@ -61,11 +63,11 @@ export default function Chart({ latitude, longitude }) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
   height: 160px;
   text-align: center;  
-  margin-top: 20px;
-`
+  margin-top: 20px;  
+`;
 const blinkAnimation = keyframes`
   0% { opacity: 0; }
   50% { opacity: 1; }
@@ -75,7 +77,11 @@ const blinkAnimation = keyframes`
 const Texto = styled.div`
   font-family: Poppins, sans-serif;
   text-align: center;
-  font-size: 100px;
+  font-size: 30px;
   color: #C8C8C8;
   animation: ${blinkAnimation} 0.2s linear infinite;
+  @media (min-width: 768px) {
+    font-size: 100px; 
+    
+  }
 `;

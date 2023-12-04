@@ -129,12 +129,12 @@ export default function Homepage() {
           <NoCity>Para começar, pesquise por uma cidade.</NoCity>
         )}
           <Footer>
-          <Texto>
-            Dados fornecidos pela{" "}  
-            <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
-              Open Weather API
-            </a>
-          </Texto>
+            <Texto>
+              Dados fornecidos pela{" "}  
+              <a href="https://openweathermap.org/api" target="_blank" rel="noopener noreferrer">
+                Open Weather API
+              </a>
+            </Texto>
           </Footer>
         </Direita>
       </Container>
@@ -310,16 +310,19 @@ const ContainerTwo = styled.div`
 `;
 
 const Footer = styled.footer`
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
-  bottom: 0;
   width: 100%; 
   height: 50px;
-  position: fixed;
+  position: absolute; 
+  bottom: 0;
 
   @media (min-width: 768px) {
-    width: 50%; 
+    display: flex;
+    position: fixed; 
+    width: 65%; 
+  
   }
 `;
 
